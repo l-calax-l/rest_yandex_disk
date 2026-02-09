@@ -11,6 +11,9 @@ class Config(BaseSettings):
     yandex_login: str = Field(default="", description="Your Yandex login.")
     yandex_display_name: str = Field(default="", description="Your Yandex displayname.")
 
+    time_out: int = 15
+    poll_interval: float = 0.5
+
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", case_sensitive=False, extra="ignore"
     )

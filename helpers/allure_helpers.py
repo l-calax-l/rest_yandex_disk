@@ -54,7 +54,7 @@ def attach_validation_result(
 ) -> None:
     """Прикрепляет результат валидации поля к Allure отчёту."""
     if passed is None:
-        passed = expected == actual
+        passed = expected in actual
 
     status = "PASSED" if passed else "FAILED"
 

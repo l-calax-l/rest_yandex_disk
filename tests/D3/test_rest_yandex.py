@@ -1,6 +1,6 @@
 import allure
 
-from api.yandex_client import YandexDiskClient
+from api.clients.yandex_client import YandexDiskClient
 from config import settings
 from helpers.allure_helpers import attach_api_response, attach_validation_result
 
@@ -47,11 +47,10 @@ def test_tc1_auth_valid_token(yandex_client):
 )
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.tag("security", "auth", "negative")
-def test_tc2_auth_missing_token():
-    no_auth_client = YandexDiskClient(token=None)
+def test_tc2_auth_missing_token(yandex_no_auth_client):
 
     with allure.step("Отправить GET запрос по адресу v1/disk/ без передачи токена"):
-        response = no_auth_client.get_disk_info()
+        response = yandex_no_auth_client.get_disk_info()
         attach_api_response(response, expected_status=401)
 
     with allure.step("Проверить статус код и структуру ошибки"):

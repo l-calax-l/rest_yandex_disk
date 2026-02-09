@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Yandex Disk Resource Info",
+  "type": "object",
+  "required": ["name", "type", "path", "_embedded", "resource_id", "created", "modified"],
+  "properties": {
+    "name": { "type": "string" },
+    "path": { "type": "string" },
+    "type": { "type": "string", "enum": ["dir"] },
+    "resource_id": { "type": "string" },
+    "created": { "type": "string" },
+    "modified": { "type": "string" },
+
+    "_embedded": {
+      "type": "object",
+      "required": ["items", "limit", "offset", "total"],
+      "properties": {
+        "total": { "type": "integer" },
+        "limit": { "type": "integer" },
+        "offset": { "type": "integer" },
+        "path": { "type": "string" },
+        "sort": { "type": "string" },
+
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "path", "type", "created", "modified"],
+            "properties": {
+              "name": { "type": "string" },
+              "path": { "type": "string" },
+              "type": { "type": "string", "enum": ["file", "dir"] },
+              "created": { "type": "string" },
+              "modified": { "type": "string" },
+              "mime_type": { "type": ["string", "null"] },
+              "size": { "type": ["integer", "null"] },
+              "md5": { "type": ["string", "null"] },
+              "resource_id": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "public_key": { "type": ["string", "null"] },
+    "public_url": { "type": ["string", "null"] },
+    "revision": { "type": "integer" }
+  }
+}
